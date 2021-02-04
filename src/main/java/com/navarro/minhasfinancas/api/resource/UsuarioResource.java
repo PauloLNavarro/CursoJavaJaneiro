@@ -27,7 +27,6 @@ public class UsuarioResource {
 			Usuario usuarioAutenticado = service.autenticar(dto.getEmail(),dto.getSenha());
 			return  ResponseEntity.ok(usuarioAutenticado);
 		} catch (ErroAutenticacao e) {
-			// TODO Auto-generated catch block
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}		
 	}
@@ -48,7 +47,6 @@ public class UsuarioResource {
 			Usuario usuarioSalvo = service.salvarUsuario(usuario);
 			return new ResponseEntity(usuarioSalvo, HttpStatus.CREATED);
 		} catch (RegraNegocioException e) {
-			// TODO Auto-generated catch block
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}		
 	}
