@@ -21,7 +21,7 @@ public class UsuarioResource {
 	public UsuarioResource(UsuarioService service) {
 		this.service = service;
 		
-	}
+	}	
 	
 	@PostMapping("/autenticar")
 	public ResponseEntity autenticar(@RequestBody UsuarioDTO dto) {
