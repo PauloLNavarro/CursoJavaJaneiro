@@ -3,11 +3,18 @@ package com.navarro.minhasfinancas.service.impl;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.navarro.minhasfinancas.exception.ErroAutenticacao;
 import com.navarro.minhasfinancas.exception.RegraNegocioException;
 import com.navarro.minhasfinancas.model.entity.Usuario;
 import com.navarro.minhasfinancas.model.repository.UsuarioRepository;
 import com.navarro.minhasfinancas.service.UsuarioService;
+
+
+
+
+
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
@@ -26,19 +33,20 @@ public class UsuarioServiceImpl implements UsuarioService{
 		
 		if(!usuario.isPresent()) {
 			throw new ErroAutenticacao("Usuário não encontrado para o email informado.");
-		}
+		}		
 		
 		if(!usuario.get().getSenha().equals(senha)) {
-			throw new ErroAutenticacao("Senha invalida.")
+			throw new ErroAutenticacao("Senha inválida.");
 		}
 		
 		return usuario.get();
 	}
 
 	@Override
+	@Transactional
 	public Usuario salvarUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return null;
+		validarEmail(usuario.getEmail());
+		return repository.save(usuario);
 	}
 
 	@Override
