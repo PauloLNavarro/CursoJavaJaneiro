@@ -18,7 +18,9 @@ import com.navarro.minhasfinancas.service.UsuarioService;
 public class UsuarioResource {
 	private UsuarioService service;
 	
-
+	public UsuarioResource(UsuarioService service) {
+		this.service = service;
+	}
 	
 	@PostMapping("/autenticar")
 	public ResponseEntity autenticar(@RequestBody UsuarioDTO dto) {
